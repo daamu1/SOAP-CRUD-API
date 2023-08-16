@@ -44,7 +44,7 @@ You will learn
 ## What You Will Need?
 
 We will help you install 
-- Java 8
+- Java 17
 - Eclipse
 - Maven
 - Embedded Tomcat
