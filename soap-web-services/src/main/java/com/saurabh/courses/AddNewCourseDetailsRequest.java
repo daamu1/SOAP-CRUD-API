@@ -25,7 +25,7 @@ import jakarta.xml.bind.annotation.XmlType;
  *   &lt;complexContent&gt;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
  *       &lt;sequence&gt;
- *         &lt;element name="CourseDetails" type="{http://saurabh.com/courses}CourseDetails"/&gt;
+ *         &lt;element name="CourseDataDetails" type="{http://saurabh.com/courses}CourseDataDetails"/&gt;
  *       &lt;/sequence&gt;
  *     &lt;/restriction&gt;
  *   &lt;/complexContent&gt;
@@ -36,36 +36,36 @@ import jakarta.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "courseDetails"
+    "courseDataDetails"
 })
-@XmlRootElement(name = "GetCourseDetailsResponse")
-public class GetCourseDetailsResponse {
+@XmlRootElement(name = "AddNewCourseDetailsRequest")
+public class AddNewCourseDetailsRequest {
 
-    @XmlElement(name = "CourseDetails", required = true)
-    protected CourseDetails courseDetails;
+    @XmlElement(name = "CourseDataDetails", required = true)
+    protected CourseDataDetails courseDataDetails;
 
     /**
-     * Gets the value of the courseDetails property.
+     * Gets the value of the courseDataDetails property.
      * 
      * @return
      *     possible object is
-     *     {@link CourseDetails }
+     *     {@link CourseDataDetails }
      *     
      */
-    public CourseDetails getCourseDetails() {
-        return courseDetails;
+    public CourseDataDetails getCourseDataDetails() {
+        return courseDataDetails;
     }
 
     /**
-     * Sets the value of the courseDetails property.
+     * Sets the value of the courseDataDetails property.
      * 
      * @param value
      *     allowed object is
-     *     {@link CourseDetails }
+     *     {@link CourseDataDetails }
      *     
      */
-    public void setCourseDetails(CourseDetails value) {
-        this.courseDetails = value;
+    public void setCourseDataDetails(CourseDataDetails value) {
+        this.courseDataDetails = value;
     }
 
 }

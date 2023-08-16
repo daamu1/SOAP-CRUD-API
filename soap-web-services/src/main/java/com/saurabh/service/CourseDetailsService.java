@@ -4,13 +4,18 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.saurabh.bean.Course;
+import com.saurabh.entity.Course;
+import com.saurabh.exception.CourseNotFoundException;
+import com.saurabh.repository.CourseRepository;
 
 @Component
 public class CourseDetailsService {
-	
+	@Autowired
+	private CourseRepository courseRepository;
+
 	public enum Status {
 		SUCCESS, FAILURE;
 	}
@@ -33,29 +38,26 @@ public class CourseDetailsService {
 
 	// course - 1
 	public Course findById(int id) {
-		for (Course course : courses) {
-			if (course.getId() == id)
-				return course;
-		}
-		return null;
+		Course course = courseRepository.findById(id)
+				.orElseThrow(() -> new CourseNotFoundException("Course with the given id is not available"));
+		return course;
 	}
 
 	// courses
 	public List<Course> findAll() {
-		return courses;
+		return (List<Course>) courseRepository.findAll();
 	}
 
 	public Status deleteById(int id) {
-		Iterator<Course> iterator = courses.iterator();
-		while (iterator.hasNext()) {
-			Course course = iterator.next();
-			if (course.getId() == id) {
-				iterator.remove();
-				return Status.SUCCESS;
-			}
-		}
-		return Status.FAILURE;
+		Course course = courseRepository.findById(id)
+				.orElseThrow(() -> new CourseNotFoundException("Course with the given id is not available"));
+		courseRepository.deleteById(id);
+		return Status.SUCCESS;
 	}
 
 	// updating course & new course
+	public Status addNewCourse(Course course) {
+		courseRepository.save(course);
+		return Status.SUCCESS;
+	}
 }

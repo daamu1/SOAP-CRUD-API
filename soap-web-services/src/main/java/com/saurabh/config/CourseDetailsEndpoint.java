@@ -8,7 +8,10 @@ import org.springframework.ws.server.endpoint.annotation.PayloadRoot;
 import org.springframework.ws.server.endpoint.annotation.RequestPayload;
 import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
 
-import com.saurabh.bean.Course;
+import com.saurabh.entity.Course;
+import com.saurabh.courses.AddNewCourseDetailsRequest;
+import com.saurabh.courses.AddNewCourseDetailsResponse;
+import com.saurabh.courses.CourseDataDetails;
 import com.saurabh.courses.CourseDetails;
 import com.saurabh.courses.DeleteCourseDetailsRequest;
 import com.saurabh.courses.DeleteCourseDetailsResponse;
@@ -91,6 +94,21 @@ public class CourseDetailsEndpoint {
 
 		return response;
 	}
+	@PayloadRoot(namespace = "http://saurabh.com/courses", localPart = "AddNewCourseDetailsRequest")
+	@ResponsePayload
+	public AddNewCourseDetailsResponse addCourseDetailsRequest(@RequestPayload AddNewCourseDetailsRequest request) {
+	    CourseDataDetails courseDetails = request.getCourseDataDetails();
+	    Course newCourse = new Course();
+	    newCourse.setName(courseDetails.getName());
+	    newCourse.setDescription(courseDetails.getDescription());
+
+	    Status status = service.addNewCourse(newCourse);
+	    
+	    AddNewCourseDetailsResponse response = new AddNewCourseDetailsResponse();
+	    response.setStatus(mapStatus(status));
+	    return response;
+	}
+
 
 	private com.saurabh.courses.Status mapStatus(Status status) {
 		if (status == Status.FAILURE)
