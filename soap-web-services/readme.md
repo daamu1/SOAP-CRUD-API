@@ -55,20 +55,7 @@ We will help you install
  - WSDL URl - http://localhost:8080/ws/courses.wsdl
  - Spring Web Services - http://projects.spring.io/spring-ws/
 
-## Security Dependencies
 
-```xml
-	<dependency>
-            <groupId>org.springframework.ws</groupId>
-            <artifactId>spring-ws-security</artifactId>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.springframework.security</groupId>
-                    <artifactId>spring-security-core</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        
 ```    
 
 ## Security Request
@@ -92,60 +79,16 @@ We will help you install
 </Envelope>
 ```
 
-## securityPolicy.xml
-```
-<?xml version="1.0" encoding="UTF-8"?>
-<xwss:SecurityConfiguration 
-xmlns:xwss="http://java.sun.com/xml/ns/xwss/config">
-	<xwss:RequireUsernameToken
-		passwordDigestRequired="false" nonceRequired="false" />
-</xwss:SecurityConfiguration>
-```
-
-## Error
-java.lang.NoClassDefFoundError: jakarta/wsdl/extensions/ExtensibilityElement
-
-## Security with WS-Security
- - Authentication
- - Digital signatures
- - Certificates
- 
- - Implementation -> XWSS - XML and Web Services Security.
-   - Security Policy
-   - XwsSecurityInterceptor
-
-
 ## Complete Code Example
 
-### /example-files/Request-Security.xml
 
-```xml
-<Envelope xmlns="http://schemas.xmlsoap.org/soap/envelope/">
-	<Header>
-		<wsse:Security
-			xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd"
-			mustUnderstand="1">
-			<wsse:UsernameToken>
-				<wsse:Username>user</wsse:Username>
-				<wsse:Password>password</wsse:Password>
-			</wsse:UsernameToken>
-		</wsse:Security>
-	</Header>
-	<Body>
-		<GetCourseDetailsRequest xmlns="http://in28minutes.com/courses">
-			<id>1</id>
-		</GetCourseDetailsRequest>
-	</Body>
-</Envelope>
-```
----
 
 ### /example-files/Request.xml
 
 ```xml
 <Envelope xmlns="http://schemas.xmlsoap.org/soap/envelope/">
 	<Body>
-		<GetCourseDetailsRequest xmlns="http://in28minutes.com/courses">
+		<GetCourseDetailsRequest xmlns="http://saurabh.com/courses">
 			<id>1</id>
 		</GetCourseDetailsRequest>
 	</Body>
@@ -160,7 +103,7 @@ java.lang.NoClassDefFoundError: jakarta/wsdl/extensions/ExtensibilityElement
 	<SOAP-ENV:Header />
 	<SOAP-ENV:Body>
 		<SOAP-ENV:Fault>
-			<faultcode xmlns:ns0="http://in28minutes.com/courses">ns0:001_COURSE_NOT_FOUND</faultcode>
+			<faultcode xmlns:ns0="http://saurabh.com/courses">ns0:001_COURSE_NOT_FOUND</faultcode>
 			<faultstring xml:lang="en">Invalid Course Id 1234</faultstring>
 		</SOAP-ENV:Fault>
 	</SOAP-ENV:Body>
@@ -174,7 +117,7 @@ java.lang.NoClassDefFoundError: jakarta/wsdl/extensions/ExtensibilityElement
 <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/">
     <SOAP-ENV:Header/>
     <SOAP-ENV:Body>
-        <ns2:GetCourseDetailsResponse xmlns:ns2="http://in28minutes.com/courses">
+        <ns2:GetCourseDetailsResponse xmlns:ns2="http://saurabh.com/courses">
             <ns2:CourseDetails>
                 <ns2:id>1</ns2:id>
                 <ns2:name>Spring</ns2:name>
@@ -194,7 +137,7 @@ java.lang.NoClassDefFoundError: jakarta/wsdl/extensions/ExtensibilityElement
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>com.in28minutes.soap.webservices</groupId>
+	<groupId>com.saurabh</groupId>
 	<artifactId>soap-course-management</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
